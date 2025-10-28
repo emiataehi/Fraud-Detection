@@ -81,6 +81,8 @@ A comprehensive fraud detection system analyzing 100,000 e-commerce transactions
 
 ## 🛠️ Technical Approach
 
+## 🛠️ Technical Approach
+
 ### Phase 1: Exploratory Data Analysis ✅ (COMPLETE)
 
 **Comprehensive analysis across 8 feature groups to identify fraud patterns:**
@@ -252,41 +254,53 @@ A comprehensive fraud detection system analyzing 100,000 e-commerce transactions
 
 ---
 
-### Phase 3: Model Building ⏳ (UPCOMING)
-
-**Planned approach for handling imbalanced classification:**
+### Phase 3: Model Building ✅ (COMPLETE)
 
 #### Data Preparation
 ```
-⏳ Feature selection - Remove redundant/low-value columns
-⏳ Handle remaining missing values - Imputation strategies
-⏳ Train/test split - Stratified sampling to maintain 2.56% fraud rate
-⏳ Feature scaling - Normalize numerical features for model performance
+✓ Feature selection (425 features)
+✓ Train/test split (80k/20k, stratified)
+✓ Missing value imputation (median strategy)
+✓ Feature scaling (StandardScaler)
+✓ Class imbalance handling (SMOTE oversampling)
 ```
 
-#### Class Imbalance Handling
-```
-⏳ SMOTE (Synthetic Minority Over-sampling Technique)
-⏳ Class weights adjustment in model training
-⏳ Threshold optimization for business objectives
-⏳ Ensemble methods for robust predictions
-```
+#### Models Trained & Evaluated
 
-#### Model Training & Selection
-```
-⏳ Baseline model - Logistic Regression for interpretability
-⏳ Random Forest - Handle non-linear relationships
-⏳ XGBoost/LightGBM - Gradient boosting for best performance
-⏳ Hyperparameter tuning - Grid/Random search optimization
-```
+**Comparison:**
 
-#### Model Evaluation
-```
-⏳ Confusion matrix analysis
-⏳ Precision, Recall, F1-score (NOT accuracy!)
-⏳ ROC-AUC curve for model discrimination
-⏳ Business impact quantification
-⏳ Feature importance analysis
+| Model | ROC-AUC | Precision | Recall | F1-Score | False Positives |
+|-------|---------|-----------|--------|----------|-----------------|
+| Logistic Regression | 0.853 | 0.11 | 0.72 | 0.19 | 3,024 |
+| Random Forest | 0.886 | 0.28 | 0.57 | 0.38 | 731 |
+| **XGBoost (Final)** | **0.898** | **0.71** | **0.44** | **0.55** | **94** |
+
+#### Final Model: XGBoost
+
+**Performance Highlights:**
+- **ROC-AUC: 0.898** - Excellent discrimination between fraud and legitimate transactions
+- **Precision: 71%** - Of transactions flagged as fraud, 71% are actually fraud (minimal false alarms)
+- **Recall: 44%** - Catches 227 out of 512 fraudulent transactions (44%)
+- **False Positives: 94** - Only 94 legitimate transactions incorrectly flagged (0.5% of legitimate transactions)
+
+**Business Impact:**
+- Balanced approach: High precision minimizes customer friction from false alarms
+- Catches nearly half of fraud cases automatically
+- Remaining fraud attempts can be caught through secondary verification
+- **Estimated savings:** At 44% fraud detection with $134 average fraud amount, prevents ~$13,600 in losses per 512 fraud attempts
+
+**Model Selection Rationale:**
+XGBoost chosen over Random Forest and Logistic Regression due to:
+1. Highest ROC-AUC (best overall discrimination)
+2. Significantly better precision (71% vs 28% for RF, 11% for LR)
+3. Dramatic reduction in false positives (94 vs 731 for RF, 3,024 for LR)
+4. Better customer experience (fewer legitimate transactions blocked)
+
+**Technical Details:**
+- Algorithm: Gradient Boosting (XGBoost)
+- Training samples: 155,902 (after SMOTE balancing)
+- Features: 425 engineered features
+- Hyperparameters: n_estimators=100, max_depth=6, learning_rate=0.1
 ```
 
 ---
@@ -469,10 +483,8 @@ This project is licensed under the MIT License - see LICENSE file for details.
 
 ## 📝 Project Status
 
-**Current Phase:** Feature Engineering (75% complete)
+**Current Phase:** Feature Engineering (60% complete)
 
 **Last Updated:** [25/10/2025]
 
-
 **Next Milestone:** Model Building & Evaluation
-
