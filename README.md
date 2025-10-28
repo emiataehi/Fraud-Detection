@@ -469,9 +469,10 @@ This project is licensed under the MIT License - see LICENSE file for details.
 
 ## 📝 Project Status
 
-**Current Phase:** Feature Engineering (60% complete)
+**Current Phase:** Feature Engineering (75% complete)
 
 **Last Updated:** [25/10/2025]
 
 
 **Next Milestone:** Model Building & Evaluation
+
